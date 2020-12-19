@@ -7,4 +7,6 @@ urlpatterns = [
     # route for finches index
     path('finches/', views.finches_index, name='index'),
     path('finches/<int:finch_id>/', views.finches_detail, name='detail'),
+    # new route used to show a form and create a finch
+    path('finches/create/', views.FinchCreate.as_view(), name='finches_create'),
 ]
