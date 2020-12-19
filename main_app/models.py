@@ -1,5 +1,5 @@
 from django.db import models
-
+from datetime import date
 from django.urls import reverse
 
 MEALS = (
@@ -19,6 +19,9 @@ class Finch(models.Model):
     def get_absolute_url(self):
         return reverse('detail', kwargs={'finch_id': self.id})
 
+    def fed_for_today(self):
+        return self.feeding_set.filter(date=date.today()).count() >= len(MEALS)
+
 class Feeding(models.Model):
     date = models.DateField('feeding date')
     meal = models.CharField(
@@ -34,3 +37,6 @@ class Feeding(models.Model):
     def __str__(self):
         # Nice method for obtaining the friendly value of a Field.choice
         return f"{self.get_meal_display()} on {self.date}"
+
+    class Meta:
+        ordering = ['-date']
