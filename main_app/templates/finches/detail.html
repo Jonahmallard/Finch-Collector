@@ -20,6 +20,7 @@
         <a href="{% url 'finches_delete' finch.id %}">Delete</a>
       </div>
     </div>
+    <a href="{% url 'index' %}">Back</a>
   </div>
   <div class="col s6">
     <form action="{% url 'add_feeding' finch.id %}" method="post">
